@@ -1,72 +1,94 @@
 package bet;
 
+/*
+ * Options to calculate a bet
+ */
 public class BetOptions {
 
-  private String mode;
+  private String calculateMode;
   private String factMode;
-  private int numThreads;
+  private int totalThreads;
   private int precision;
 
 
   private int repeptitions;
-  private String outputPath;
+  private String fileResultPath;
 
-  public BetOptions(String mode, String factMode, int numThreads, int precision, int repetitions,
-      String outputPath) {
-    this.mode = mode;
+  /**
+   * Create bet options for a bet
+   * 
+   * @param calculateMode - a way the bet to be calculated
+   * @param factMode - factorial mode to be used for calculation
+   * @param totalThreads - total threads to be used
+   * @param precision - precision after the decimal point to be used
+   * @param repetitions - total repetitions of the calculation
+   * @param fileResultPath - destination path where the file result to be saved
+   */
+  public BetOptions(String calculateMode, String factMode, int totalThreads, int precision,
+      int repetitions, String fileResultPath) {
+    this.calculateMode = calculateMode;
     this.factMode = factMode;
-    this.numThreads = numThreads;
+    this.totalThreads = totalThreads;
     this.precision = precision;
     this.repeptitions = repetitions;
-    this.outputPath = outputPath;
+    this.fileResultPath = fileResultPath;
 
   }
 
-  public String getMode() {
-    return mode;
+  /**
+   * Retrieve the calculate mode
+   * 
+   * @return calculate mode
+   */
+  public String getCalculateMode() {
+    return calculateMode;
   }
 
-  public void setMode(String mode) {
-    this.mode = mode;
-  }
 
+  /**
+   * Retrieve factorial mode to be used
+   * 
+   * @return factorial mode
+   */
   public String getFactMode() {
     return factMode;
   }
 
-  public void setFactMode(String factMode) {
-    this.factMode = factMode;
+
+  /**
+   * Total threads to be used for calculation
+   * 
+   * @return threads used for calculation
+   */
+  public int getTotalThreads() {
+    return totalThreads;
   }
 
-  public int getNumThreads() {
-    return numThreads;
-  }
 
-  public void setNumThreads(int numThreads) {
-    this.numThreads = numThreads;
-  }
-
+  /**
+   * Retrieve Precision to be used after the decimal point
+   * 
+   * @return precision to be used after decimal point
+   */
   public int getPrecision() {
     return precision;
   }
 
-  public void setPrecision(int precision) {
-    this.precision = precision;
-  }
 
+  /**
+   * Retrieve total repetitions for calculation
+   * 
+   * @return total repetiions for calculation
+   */
   public int getRepeptitions() {
     return repeptitions;
   }
 
-  public void setRepeptitions(int repeptitions) {
-    this.repeptitions = repeptitions;
+
+
+  public String getFileResultPath() {
+    return fileResultPath;
   }
 
-  public String getOutputPath() {
-    return outputPath;
-  }
 
-  public void setOutputPath(String outputPath) {
-    this.outputPath = outputPath;
-  }
 }

@@ -1,5 +1,11 @@
 package tests;
 
+/**
+ * Constants used in the tests
+ * 
+ * @author Tankz
+ *
+ */
 public class TestConstants {
 
   public static final int MEDIUM_CACHE_SIZE = 10000;

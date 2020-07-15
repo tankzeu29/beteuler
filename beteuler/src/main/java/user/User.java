@@ -3,6 +3,12 @@ package user;
 import java.math.BigDecimal;
 import user.account.Account;
 
+/**
+ * User playing the game
+ * 
+ * @author Tankz
+ *
+ */
 public abstract class User {
 
 
@@ -19,7 +25,14 @@ public abstract class User {
   }
 
 
-
+  /**
+   * creates user using the application
+   * 
+   * @param username - user unique id name
+   * @param email - user email
+   * @param account - user account with which he plays
+   * @param winBonus - win bonus on bettings
+   */
   public User(String username, String email, Account account, BigDecimal winBonus) {
     this.username = username;
     this.email = email;
@@ -27,42 +40,42 @@ public abstract class User {
     this.winBonus = winBonus;
   }
 
+  /**
+   * Retrieves user account
+   * 
+   * @return user account
+   */
   public Account getAccount() {
     return account;
   }
 
 
-
-  public void setAccount(Account account) {
-    this.account = account;
-  }
-
-
+  /**
+   * Retrieves user email
+   * 
+   * @return user email
+   */
   public String getEmail() {
     return email;
   }
 
-  public void setEmail(String email) {
-    this.email = email;
-  }
 
+  /**
+   * Retrieves user email
+   * 
+   * @return user email
+   */
   public String getUsername() {
     return username;
   }
 
-  public void setUsername(String username) {
-    this.username = username;
-  }
-
-
+  /**
+   * Retrieves win bonus
+   * 
+   * @return win bonus
+   */
   public BigDecimal getWinBonus() {
     return winBonus;
-  }
-
-
-
-  public void setWinBonus(BigDecimal winBonus) {
-    this.winBonus = winBonus;
   }
 
 

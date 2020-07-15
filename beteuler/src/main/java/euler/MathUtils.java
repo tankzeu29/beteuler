@@ -6,22 +6,42 @@ import java.math.RoundingMode;
 import java.util.stream.LongStream;
 import euler.strategy.LambertW;
 
+/*
+ * Computes mathematical expressions
+ */
 public class MathUtils {
 
   private final static double EULER_NUMBER_MAIN_VALUE = 2.71;
   private final static int START_RANGE = 2;
 
-  public static BigInteger factorial(final long step) {
-    return LongStream.range(START_RANGE, step + 1).mapToObj(BigInteger::valueOf)
+  /**
+   * Computes factorial with parallel streams
+   * 
+   * @param factorialIndex - factorial number to be computed
+   * @return computed factorial
+   */
+  public static BigInteger factorial(final long factorialIndex) {
+    return LongStream.range(START_RANGE, factorialIndex + 1).mapToObj(BigInteger::valueOf)
         .reduce(BigInteger.ONE, (current, factSoFar) -> factSoFar.multiply(current));
   }
 
+  /**
+   * Returns the total iterations to be executed
+   * 
+   * @param precision -precision for computation of Euler number
+   * @return aproximate iterations to be executed
+   */
   public static int calculateIterations(int precision) {
     return aprox(precision) + 1;
 
   }
 
-
+  /**
+   * Find the approximate iterations for given precision
+   * 
+   * @param precision - precision for computation of Euler number
+   * @return
+   */
   protected static int aprox(final int precision) {
     double startFraction = precision * Math.log(10);
 

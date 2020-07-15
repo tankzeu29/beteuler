@@ -23,18 +23,36 @@ import euler.timer.Timer;
 import user.User;
 import user.account.Account;
 
+/**
+ * Bet operator computing bets
+ */
 public class BetOperator {
 
+  /**
+   * All playing users
+   */
   private Map<String, User> playingUsers;
+  /**
+   * current bet games
+   */
   private Map<User, List<Bet>> currentBetGames;
 
+  /**
+   * creates Bet operator
+   */
   public BetOperator() {
     playingUsers = new HashMap<>();
     currentBetGames = new HashMap<>();
   }
 
 
-
+  /**
+   * Creates bet for a user with bet amount and particular bet
+   * 
+   * @param user - user that created the bet
+   * @param bet - bet the user bet on
+   * @param amount - money bet from the user
+   */
   public void addBet(User user, Bet bet, BigDecimal amount) {
 
     String username = user.getUsername();
@@ -51,7 +69,9 @@ public class BetOperator {
 
   }
 
-
+  /**
+   * Calculates the wins/losses for all bets
+   */
   public void calculateAllBets() {
     for (Entry<User, List<Bet>> betEntry : currentBetGames.entrySet()) {
       User user = betEntry.getKey();
@@ -64,17 +84,29 @@ public class BetOperator {
   }
 
 
-
+  /**
+   * Starts a bet and calculates the time it took to be computed
+   * 
+   * @param betOptions - bet options of a bet
+   * @return the time it took for a bet to complete
+   */
   private BigDecimal findBetResult(BetOptions betOptions) {
-    Timer timer = createCalculatingBetTimer(betOptions.getMode(), betOptions.getRepeptitions(),
-        betOptions.getFactMode(), betOptions.getNumThreads(), betOptions.getPrecision(),
-        betOptions.getOutputPath());
+    Timer timer = createCalculatingBetTimer(betOptions.getCalculateMode(),
+        betOptions.getRepeptitions(), betOptions.getFactMode(), betOptions.getTotalThreads(),
+        betOptions.getPrecision(), betOptions.getFileResultPath());
     double avgTime = timer.time().stream().mapToLong(l -> l).average().getAsDouble();
     System.out.println("Total time :" + avgTime);
-    BigDecimal betResult = new BigDecimal(avgTime);
-    return betResult;
+    BigDecimal betTimeResult = new BigDecimal(avgTime);
+    return betTimeResult;
   }
 
+  /**
+   * Deduces if a player has won a bet or not
+   * 
+   * @param user - user that created a bet
+   * @param bet - the user bet
+   * @param betResult - result from the bet
+   */
   private void deduceBetOutcome(User user, Bet bet, BigDecimal betResult) {
 
     Account userAccount = user.getAccount();
@@ -95,7 +127,18 @@ public class BetOperator {
 
   }
 
-  private Timer createCalculatingBetTimer(String mode, int repetitions, String factMode,
+  /**
+   * Creates timer with a bet
+   * 
+   * @param betMode - mode to be used for computation
+   * @param repetitions - total repetitions of the bet computation
+   * @param factMode - factorial mode to be used for calculation
+   * @param numThreads - total threads to be used for computation
+   * @param precision - precision after the decimal point of the decimal number
+   * @param outputPath - destination where the result should be saved
+   * @return timer with strategy to calculate bet
+   */
+  private Timer createCalculatingBetTimer(String betMode, int repetitions, String factMode,
       int numThreads, int precision, String outputPath) {
     Timer timer;
 
@@ -116,24 +159,24 @@ public class BetOperator {
 
 
     if (FactorialMode.CACHED.getValue().equals(factMode)
-        && ComputeMode.SINGLE.getValue().equals(mode)) {
+        && ComputeMode.SINGLE.getValue().equals(betMode)) {
       timer = new Timer(repetitions, () -> {
         CacheFact factorialCache = CacheFact.of(precision);
         AbstractStrategy strategy = EulerStrategy.singleCached(factorialCache);
         calculator.accept(strategy);
       });
-    } else if (ComputeMode.SINGLE.getValue().equals(mode)
+    } else if (ComputeMode.SINGLE.getValue().equals(betMode)
         && FactorialMode.DC.getValue().equals(factMode)) {
       timer = new Timer(repetitions, () -> {
         AbstractStrategy strategy = EulerStrategy.singleDC();
         calculator.accept(strategy);
       });
-    } else if (ComputeMode.SHARED.getValue().equals(mode)) {
+    } else if (ComputeMode.SHARED.getValue().equals(betMode)) {
       timer = new Timer(repetitions, () -> {
         AbstractStrategy strategy = EulerStrategy.commonForkJoin();
         calculator.accept(strategy);
       });
-    } else if (ComputeMode.SINGLE.getValue().equals(mode)) {
+    } else if (ComputeMode.SINGLE.getValue().equals(betMode)) {
       timer = new Timer(repetitions, () -> {
         AbstractStrategy strategy = EulerStrategy.single();
         calculator.accept(strategy);
@@ -142,7 +185,7 @@ public class BetOperator {
 
 
 
-    else if (ComputeMode.PARALLEL.getValue().equals(mode)
+    else if (ComputeMode.PARALLEL.getValue().equals(betMode)
         && FactorialMode.CACHED.getValue().equals(factMode)) {
       timer = new Timer(repetitions, () -> {
         CacheFact factorialCache = CacheFact.of(MathUtils.calculateIterations(precision));
@@ -151,13 +194,13 @@ public class BetOperator {
             EulerStrategy.parallelCachedFactorial(numThreads, factorialCache);
         calculator.accept(strategy);
       });
-    } else if (ComputeMode.SINGLE.getValue().equals(mode)
+    } else if (ComputeMode.SINGLE.getValue().equals(betMode)
         && FactorialMode.DC.getValue().equals(factMode)) {
       timer = new Timer(repetitions, () -> {
         AbstractStrategy strategy = EulerStrategy.parallelDC(numThreads);
         calculator.accept(strategy);
       });
-    } else if (ComputeMode.SELF.getValue().equals(mode)) {
+    } else if (ComputeMode.SELF.getValue().equals(betMode)) {
       timer = new Timer(repetitions, () -> {
 
         CacheFact factorialCache = CacheFact.of(MathUtils.calculateIterations(precision));

@@ -14,7 +14,10 @@ import user.PowerUser;
 import user.User;
 import user.account.Account;
 
-
+/**
+ * Responsible for being starting point of the application
+ * 
+ */
 
 public class AppRunner {
 
@@ -23,11 +26,19 @@ public class AppRunner {
   public static final int ONE_CORE = 1;
   private static BetOperator betOperator;
 
+  /**
+   * Creates application instance
+   * 
+   * @param commandArguments
+   */
   AppRunner(String[] commandArguments) {
     this.commandArguments = commandArguments;
     betOperator = new BetOperator();
   }
 
+  /**
+   * Initializes the betting game
+   */
   void run() {
 
     try {
@@ -74,12 +85,18 @@ public class AppRunner {
     }
   }
 
-
+  /**
+   * Starts computation of the bets
+   */
   public void calculateBets() {
     betOperator.calculateAllBets();
   }
 
-
+  /**
+   * Entry point of the application.Reads the console parameters
+   * 
+   * @param args - command line arguments
+   */
   public static void main(String[] args) {
 
     AppRunner appRunner = new AppRunner(args);

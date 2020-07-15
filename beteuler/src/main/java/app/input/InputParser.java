@@ -7,15 +7,25 @@ import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
-import app.input.CmdOption;
 import app.logging.ApplicationLogger;
 
+/*
+ * Parses player input from the console
+ */
 public class InputParser {
 
-  private InputParser() {
+  /*
+   * Private constructor to prevent creation
+   */
+  public InputParser() {
 
   }
 
+  /**
+   * Returns player options from the command line
+   *
+   * @return all available option to pass from the console
+   */
   public static Options getOptions() {
     Options options = new Options();
     options.addOption(CmdOption.MODE.getKey(), true, "Execution Mode");
@@ -37,14 +47,34 @@ public class InputParser {
     return options;
   }
 
+  /**
+   * Returns an Image object that can then be painted on the screen. The url argument must specify
+   * 
+   * @param commandLine - command line
+   * @param optionCode - command option
+   * @return the image at the specified URL
+   */
   public static boolean isOptionAvailable(CommandLine commandLine, CmdOption optionCode) {
     return commandLine.hasOption(optionCode.getKey());
   }
 
+  /**
+   * Retrieves value for a command line parameter
+   * 
+   * @param commandLine - command line
+   * @param optionCode - command option
+   * @return value of a command line option
+   */
   public static String getOptionValue(CommandLine commandLine, CmdOption optionCode) {
     return commandLine.getOptionValue(optionCode.getKey(), optionCode.getValue());
   }
 
+  /**
+   * Converts command line arguments to object represeting the arguments
+   * 
+   * @param args - command line arguments
+   * @return command line object representing the player input
+   */
   public static Optional<CommandLine> parseCommandLine(String[] args) {
     Options options = InputParser.getOptions();
     CommandLineParser parser = new DefaultParser();

@@ -4,17 +4,34 @@ import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Represents cached factorial strategy
+ * 
+ * @author Tankz
+ *
+ */
 public class CacheFact implements Factorial {
 
   private Map<Long, BigInteger> factCache;
 
-  private CacheFact(int k) {
+  /**
+   * Creates factorial cache with size
+   * 
+   * @param size - factorial cache size
+   */
+  private CacheFact(int size) {
 
     factCache = new HashMap<>();
-    createCache(k);
+    initializeCache(size);
 
   }
 
+  /**
+   * Creates factorial cache based on precision
+   * 
+   * @param precision - precision for Euler numer to be computed
+   * @return factorial cache
+   */
   public static CacheFact of(int precision) {
 
 
@@ -22,7 +39,12 @@ public class CacheFact implements Factorial {
   }
 
 
-  private void createCache(int maxCacheValue) {
+  /**
+   * Initializes factorial cache with factorial values by given max bound
+   * 
+   * @param maxCacheValue - max factorial to be computed
+   */
+  private void initializeCache(int maxCacheValue) {
 
     BigInteger result = BigInteger.ONE;
     factCache.put(0l, result);
@@ -34,10 +56,15 @@ public class CacheFact implements Factorial {
     }
   }
 
+  /**
+   * Retrieves factorial by index
+   * 
+   * @return factorial value by given index
+   */
   @Override
-  public BigInteger get(long k) {
+  public BigInteger get(long factorialIndex) {
 
-    return factCache.get(k);
+    return factCache.get(factorialIndex);
   }
 
 

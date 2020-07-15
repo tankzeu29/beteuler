@@ -5,7 +5,9 @@ import euler.factorial.CacheFact;
 
 public class TestSingleThreadWithCacheFactorial extends BaseStrategyTests {
 
-
+  /**
+   * Tests single thread with cached factorial
+   */
   TestSingleThreadWithCacheFactorial() {
     super(() -> EulerStrategy.singleCached(getFactorialSupplier()));
   }

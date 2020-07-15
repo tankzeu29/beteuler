@@ -6,6 +6,9 @@ import java.util.logging.Handler;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
+/*
+ * Used to log information about the game
+ */
 public class ApplicationLogger {
 
   private static Handler fileHandler = null;
@@ -13,6 +16,9 @@ public class ApplicationLogger {
   private static final Logger LOGGER =
       Logger.getLogger(ApplicationLogger.class.getClass().getName());
 
+  /**
+   * initializes the logger
+   */
   public static void setup() {
 
     try {
@@ -29,6 +35,11 @@ public class ApplicationLogger {
 
   }
 
+  /**
+   * Retrieves singleton instance of the logger
+   * 
+   * @return application logger
+   */
   public static Logger getLogger() {
     return LOGGER;
   }
