@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"tests"}]
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"app.input"},{"l":"app.logging"},{"l":"app.modes"},{"l":"app.run"},{"l":"bet"},{"l":"bet.generator"},{"l":"bet.operator"},{"l":"bet.options"},{"l":"euler"},{"l":"euler.factorial"},{"l":"euler.strategy"},{"l":"euler.timer"},{"l":"euler.utils"},{"l":"tests"},{"l":"user"},{"l":"user.account"},{"l":"user.bonuses"}]

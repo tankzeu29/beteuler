@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import org.junit.jupiter.api.Test;
 import app.logging.ApplicationLogger;
 import euler.strategy.AbstractStrategy;
+import junit.framework.Assert;
 
 /**
  * Base class to start all the tests
@@ -69,6 +70,7 @@ public class BaseStrategyTests {
     BigDecimal eulerNumber = strategy.get().computeEulerNumber(100);
 
     String loadedTestFile = loadTestFileAsString(TestConstants.HUNDRED_DIGITS_TEST_FILE);
+    Assert.assertNotNull("Test file could not be loaded ", loadedTestFile);
     assertEquals(loadedTestFile, convertEulerNumberToString(eulerNumber),
         "First 100 digits of the euler number are not correct");
   }
@@ -81,6 +83,7 @@ public class BaseStrategyTests {
   public void testEnumber1000Digits() {
     BigDecimal eulerNumber = strategy.get().computeEulerNumber(1000);
     String loadedTestFile = loadTestFileAsString(TestConstants.THOUSAND_DIGITS_TEST_FILE);
+    Assert.assertNotNull("Test file could not be loaded ", loadedTestFile);
     assertEquals(loadedTestFile, convertEulerNumberToString(eulerNumber),
         "First 1000 digits of the euler number are not correct");
 
@@ -95,6 +98,7 @@ public class BaseStrategyTests {
     BigDecimal eulerNumber = strategy.get().computeEulerNumber(10000);
 
     String loadedTestFile = loadTestFileAsString(TestConstants.TEN_THOUSAND_DIGITS_TEST_FILE);
+    Assert.assertNotNull("Test file could not be loaded ", loadedTestFile);
     assertEquals(loadedTestFile, convertEulerNumberToString(eulerNumber),
         "First 10,000 of the euler number are not correct");
   }

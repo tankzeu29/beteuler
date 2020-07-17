@@ -11,7 +11,7 @@ public enum FactorialMode implements GameOption {
   private String name;
 
   /**
-   * Create facotrial mode
+   * Create factorial mode
    * 
    * @param name - name of the factorial mode
    */
@@ -22,7 +22,7 @@ public enum FactorialMode implements GameOption {
   /**
    * Retrieves the factorial mode name
    * 
-   * @return trieves the factorial mode name
+   * @return retrieves the factorial mode name
    */
   @Override
   public String getValue() {

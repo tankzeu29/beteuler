@@ -95,7 +95,7 @@ public class BetOperator {
         betOptions.getRepeptitions(), betOptions.getFactMode(), betOptions.getTotalThreads(),
         betOptions.getPrecision(), betOptions.getFileResultPath());
     double avgTime = timer.time().stream().mapToLong(l -> l).average().getAsDouble();
-    System.out.println("Total time :" + avgTime);
+    System.out.println("Total time :" + avgTime + " (ms)");
     BigDecimal betTimeResult = new BigDecimal(avgTime);
     return betTimeResult;
   }
@@ -116,12 +116,12 @@ public class BetOperator {
     if (bet.getBound().compareTo(betResult) > 0 && betChoice.equals(BetChoice.OVER)) {
       BigDecimal wonMoney = bet.getOdd().multiply(bet.getBetMoney());
       wonMoney = wonMoney.multiply(user.getWinBonus());
-      System.out.println("You have won " + wonMoney);
+      System.out.println("You have won " + wonMoney + " LV.");
       userAccount.addToBalance(wonMoney);
     } else {
 
       BigDecimal lostMoney = bet.getBetMoney();
-      System.out.println("You have lost " + lostMoney);
+      System.out.println("You have lost " + lostMoney + " LV.");
       userAccount.reduceBalance(bet.getBetMoney());
     }
 

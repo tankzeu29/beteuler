@@ -33,7 +33,7 @@ public enum CmdOption implements GameOption {
   }
 
   /**
-   * Retrievs parameter key name
+   * Retrieves parameter key name
    * 
    * 
    * @return the key name of a parameter
